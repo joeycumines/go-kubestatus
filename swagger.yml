@@ -1,0 +1,80 @@
+swagger: "2.0"
+info:
+  title: "Kubestatus API"
+  description: |
+    Please visit the project on GitHub for more info.
+  version: "1.0.0"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+  contact:
+    url: "https://github.com/joeycumines/kubestatus.go"
+host: "localhost:8080"
+schemes:
+- "http"
+paths:
+  /healthz:
+    get:
+      summary: "Liveness endpoint"
+      description: "Returns a 200 response if this service is live"
+      operationId: "health"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          schema:
+            $ref: '#/definitions/Status'
+          description: "OK"
+        503:
+          schema:
+            $ref: '#/definitions/Status'
+          description: "Service Unavailable"
+  /readiness:
+    get:
+      summary: "Readiness endpoint"
+      description: "Returns a 200 response if this service is ready to use"
+      operationId: "readiness"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "query"
+        name: "uuids"
+        type: "string"
+        description: "A CSV list of traversed UUIDs, oldest first"
+      responses:
+        200:
+          schema:
+            $ref: '#/definitions/Status'
+          description: "OK"
+        503:
+          schema:
+            $ref: '#/definitions/Status'
+          description: "Service Unavailable"
+        508:
+          schema:
+            $ref: '#/definitions/Status'
+          description: "Loop Detected"
+definitions:
+  Status:
+    description: "Status is the response object returned by all endpoints"
+    type: "object"
+    properties:
+      code:
+        description: "Code is the HTTP status code"
+        type: "integer"
+      message:
+        description: "Message will be either 'OK', or the error message"
+        type: "string"
+      success:
+        description: "Success will be bool set to false for anything but 200"
+        type: "boolean"
+      started:
+        description: "Started is a nanoseconds epoch indicating when the service was started"
+        type: "integer"
+        format: "int64"
+      uptime:
+        description: "Uptime is a human readable string representation of the current timestamp - started"
+        type: "string"
+      uuid:
+        description: "UUID is a per-process uuid value in the format xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+        type: "string"
