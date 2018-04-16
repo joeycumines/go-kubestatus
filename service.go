@@ -149,9 +149,6 @@ func (s *Service) Start() error {
 		}
 		err = s.Fatal().Error
 	})
-	if err == nil {
-		_, err = Client{Addresses: []string{s.config.URL()}}.Health()
-	}
 	return err
 }
 

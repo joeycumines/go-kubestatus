@@ -45,7 +45,7 @@ type (
 		// Hostname is the hostname fragment for the http server, which defaults to an empty string (all)
 		Hostname string
 
-		// StartWait is how long the kubestatus.Service.Start operation will block before checking health and readiness
+		// StartWait is how long the kubestatus.Service.Start operation will block after starting the server
 		StartWait time.Duration
 
 		// HealthHandler should return an error if the service is not ready
@@ -78,7 +78,7 @@ func NewConfig() Config {
 
 // Validate returns an error if config is invalid
 func (c Config) Validate() error {
-	if c.Port < 0 {
+	if c.Port <= 0 {
 		return fmt.Errorf("invalid port: %v", c.Port)
 	}
 	if c.StartWait < 0 {
