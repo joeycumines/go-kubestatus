@@ -20,7 +20,7 @@ import (
 	"errors"
 	"net/http"
 	"fmt"
-	"github.com/gin-gonic/gin/json"
+	"encoding/json"
 	"net/url"
 	"strings"
 )
