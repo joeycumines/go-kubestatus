@@ -113,3 +113,48 @@ func TestNewService(t *testing.T) {
 		t.Error("expected fatal error")
 	}
 }
+
+func TestNewService_configUUID(t *testing.T) {
+	config := NewConfig()
+	config.ReadinessHandler = func() error {
+		return errors.New("never_ready")
+	}
+	config.HealthHandler = func() error {
+		return nil
+	}
+
+	if config.UUID != [16]byte{} {
+		t.Fatal("unexpected config", config.UUID)
+	}
+
+	expected := [16]byte{
+		1,
+		2,
+		3,
+		4,
+		5,
+		6,
+		7,
+		8,
+		9,
+		10,
+		11,
+		12,
+		13,
+		14,
+		15,
+		16,
+	}
+
+	config.UUID = expected
+
+	service, err := NewService(config)
+
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	if service.uuid != expected {
+		t.Fatal("unexpected service", service.uuid)
+	}
+}

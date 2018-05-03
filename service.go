@@ -69,10 +69,15 @@ func NewService(config Config) (*Service, error) {
 		ctx:    ctx,
 		cancel: cancel,
 		engine: gin.New(),
-		uuid:   uuid.New(),
+		uuid:   config.UUID,
 		fatal: FatalError{
 			Error: errors.New("kubestatus.Service has not been started yet"),
 		},
+	}
+
+	// auto generated uuid is used if the provided config is a zero value
+	if service.uuid == [16]byte{} {
+		service.uuid = uuid.New()
 	}
 
 	service.engine.Use(config.GinHandlers...)

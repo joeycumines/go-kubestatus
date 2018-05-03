@@ -61,6 +61,9 @@ type (
 		// endpoints, note that the `uuids` query parameter will be set, appending configured service's UUID on the
 		// end of any existing `uuids` passed in with the original `/readiness` GET
 		Dependencies []string
+
+		// UUID may be set to override the UUID used for this service, a zero value will auto-generate.
+		UUID [16]byte
 	}
 )
 
