@@ -8,7 +8,7 @@ info:
     name: "Apache 2.0"
     url: "http://www.apache.org/licenses/LICENSE-2.0.html"
   contact:
-    url: "https://github.com/joeycumines/kubestatus.go"
+    url: "https://github.com/joeycumines/go-kubestatus"
 host: "localhost:8080"
 schemes:
 - "http"

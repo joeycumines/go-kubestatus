@@ -1,9 +1,9 @@
-# kubestatus.go
+# go-kubestatus
 
 Simplistic opinionated HTTP status server library designed to be provided 
 a bare minimum of configuration (intended for Kubernetes).
 
-https://godoc.org/github.com/joeycumines/kubestatus.go
+https://godoc.org/github.com/joeycumines/go-kubestatus
 
 - Sets up a HTTP server that serves `/readiness` and `/healthz` endpoints
 - Provides a client implementation supporting multiple instances

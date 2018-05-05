@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/joeycumines/kubestatus.go"
+	"github.com/joeycumines/go-kubestatus"
 	"time"
 	"github.com/gin-gonic/gin"
 	"fmt"
